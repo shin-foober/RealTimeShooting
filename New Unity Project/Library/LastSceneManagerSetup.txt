@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/UnityChan2D/Scenes/Introduction_Demo.unity
+  isLoaded: 1
+  isActive: 1
