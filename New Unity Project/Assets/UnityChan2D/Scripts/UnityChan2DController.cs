@@ -17,12 +17,16 @@ public class UnityChan2DController : MonoBehaviour
 
     private State m_state = State.Normal;
     private int nfirstjump;
-    private int nTimer;
+    public float fdflag;  //最初右向きなら1違うなら-1を設定
 
+    public GameObject bulletPrefab;  //弾丸のprefab
 
     GameObject refObjUP; //ボタン操作取得のために追加　↑ 用
     GameObject refObjR; //ボタン操作取得のために追加　→ 用
     GameObject refObjL; //ボタン操作取得のために追加　←　用
+    GameObject refObjF; //ボタン操作取得のために追加　弾発射用
+
+    
 
     void Reset()
     {
@@ -47,6 +51,8 @@ public class UnityChan2DController : MonoBehaviour
 
         // Animator
         m_animator.applyRootMotion = false;
+        nfirstjump = 0; 
+        fdflag=1;
     }
 
     void Awake()
@@ -54,34 +60,49 @@ public class UnityChan2DController : MonoBehaviour
         m_animator = GetComponent<Animator>();
         m_boxcollier2D = GetComponent<BoxCollider2D>();
         m_rigidbody2D = GetComponent<Rigidbody2D>();
-        refObjUP = GameObject.Find("UpButtan");
+        refObjUP = GameObject.Find("UpButtan");      //最終的に各オブジェクトをタグ付けした方がいい　処理時間を減らすため
         refObjR = GameObject.Find("RightButton");
         refObjL = GameObject.Find("LeftButton");
+        refObjF = GameObject.Find("FireButton");
         nfirstjump = 0; 
+        fdflag=1;
     }
 
     void Update()
     {
-        UpButton upBotton = refObjUP.GetComponent<UpButton>();
-        RightButton rightBotton = refObjR.GetComponent<RightButton>();
-        LeftButton leftBotton = refObjL.GetComponent<LeftButton>();
+        UpButton upButton = refObjUP.GetComponent<UpButton>();
+        RightButton rightButton = refObjR.GetComponent<RightButton>();
+        LeftButton leftButton = refObjL.GetComponent<LeftButton>();
+        FireButton fireButton = refObjF.GetComponent<FireButton>();
         if (m_state != State.Damaged)
         {
-            float x = rightBotton.fRight + leftBotton.fLeft;
-            bool jump = upBotton.bJump;
+            float x = rightButton.fRight + leftButton.fLeft;
+            bool jump = upButton.bJump;
+            float angleDir = transform.eulerAngles.z * (Mathf.PI / 180.0f);
+
             Move(x, jump);
+
+// 弾の発射処理
+            if(fireButton.bfire)
+                Shot();
 
             if (false == jump) //ジャンプが二回読み込まれてしまったので一回だけにするように調整　
                 nfirstjump = 0;
         }
     }
 
+
+    void Shot()
+    {
+     Instantiate(bulletPrefab, new Vector3(transform.position.x + fdflag*0.5f, transform.position.y + 0.5f, 0), Quaternion.identity);
+    }
     void Move(float move, bool jump)
     {
         if (Mathf.Abs(move) > 0)
         {
             Quaternion rot = transform.rotation;
             transform.rotation = Quaternion.Euler(rot.x, Mathf.Sign(move) == 1 ? 0 : 180, rot.z);
+            fdflag=Mathf.Sign(move); 
         }
 
         m_rigidbody2D.velocity = new Vector2(move * maxSpeed, m_rigidbody2D.velocity.y);
