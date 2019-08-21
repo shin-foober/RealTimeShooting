@@ -78,7 +78,6 @@ public class UnityChan2DController : MonoBehaviour
         {
             float x = rightButton.fRight + leftButton.fLeft;
             bool jump = upButton.bJump;
-            float angleDir = transform.eulerAngles.z * (Mathf.PI / 180.0f);
 
             Move(x, jump);
 
@@ -115,11 +114,15 @@ public class UnityChan2DController : MonoBehaviour
         {
             m_animator.SetTrigger("Jump");
             SendMessage("Jump", SendMessageOptions.DontRequireReceiver);
-            m_rigidbody2D.AddForce(Vector2.up * jumpPower);
             nfirstjump += 1;
+            Invoke("jump", 0.02f); //落下直後にジャンプするとなぜか飛び上がらないためaddforceのみ処理を遅らせる
         }
     }
 
+    void jump()
+    {
+      m_rigidbody2D.AddForce(Vector2.up * jumpPower);
+    }
     void FixedUpdate()
     {
         Vector2 pos = transform.position;
