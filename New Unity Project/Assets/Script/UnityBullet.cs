@@ -6,12 +6,15 @@ public class UnityBullet : MonoBehaviour
 {
     private bool bdirectionflag;
     private int ndirection;
-
+    private int nTimer;
+    private int nLimittime;
     GameObject directionObj;
 
     // Start is called before the first frame update
     void Start()
     {
+        nTimer=0;
+        nLimittime=3;
         directionObj = GameObject.FindWithTag("Player");
         UnityChan2DController unityChan2DController = directionObj.GetComponent<UnityChan2DController>();
 
@@ -29,5 +32,10 @@ public class UnityBullet : MonoBehaviour
     void Update()
     {
         transform.Translate(ndirection * 0.05f, 0, 0);
+        Invoke("Destroy", nLimittime);
+    }
+    void Destroy()
+    {
+         Destroy(gameObject); 
     }
 }

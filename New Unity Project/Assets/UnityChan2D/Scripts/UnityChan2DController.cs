@@ -19,6 +19,9 @@ public class UnityChan2DController : MonoBehaviour
     private int nfirstjump;
     public float fdflag;  //最初右向きなら1違うなら-1を設定
 
+    private bool bbulletflag;
+    private int nflame;
+
     public GameObject bulletPrefab;  //弾丸のprefab
 
     GameObject refObjUP; //ボタン操作取得のために追加　↑ 用
@@ -26,12 +29,13 @@ public class UnityChan2DController : MonoBehaviour
     GameObject refObjL; //ボタン操作取得のために追加　←　用
     GameObject refObjF; //ボタン操作取得のために追加　弾発射用
 
-    
 
+    ///////////////////////////////////////////////////////////////
+    //              初期化
+    //////////////////////////////////////////////////////////////
     void Reset()
     {
         Awake();
-        nfirstjump = 0;
         // UnityChan2DController
         maxSpeed = 10f;
         jumpPower = 1000;
@@ -51,8 +55,12 @@ public class UnityChan2DController : MonoBehaviour
 
         // Animator
         m_animator.applyRootMotion = false;
-        nfirstjump = 0; 
-        fdflag=1;
+
+        
+        // Adjustparameter
+        nfirstjump = 0;
+        bbulletflag = true;
+        fdflag = 1;
     }
 
     void Awake()
@@ -64,10 +72,11 @@ public class UnityChan2DController : MonoBehaviour
         refObjR = GameObject.Find("RightButton");
         refObjL = GameObject.Find("LeftButton");
         refObjF = GameObject.Find("FireButton");
-        nfirstjump = 0; 
-        fdflag=1;
     }
 
+    /////////////////////////////////////////////////
+    //         メイン処理
+    ////////////////////////////////////////////////
     void Update()
     {
         UpButton upButton = refObjUP.GetComponent<UpButton>();
@@ -81,27 +90,42 @@ public class UnityChan2DController : MonoBehaviour
 
             Move(x, jump);
 
-// 弾の発射処理
-            if(fireButton.bfire)
+            // 弾の発射処理
+            if (fireButton.bfire && bbulletflag)
                 Shot();
 
             if (false == jump) //ジャンプが二回読み込まれてしまったので一回だけにするように調整　
                 nfirstjump = 0;
+
+            if (false == fireButton.bfire && 1 == nflame % 30) //取り敢えず30fに一度の発射で false == fireButton.bfireは高速発射防止のため追加
+                bbulletflag = true;
+
+            if (false == bbulletflag) //発射不能時のみカウント
+                nflame += 1;
         }
     }
 
-
+    /////////////////////////////////////////////////////
+    //　　　　　発射処理
+    /////////////////////////////////////////////////////
     void Shot()
     {
-     Instantiate(bulletPrefab, new Vector3(transform.position.x + fdflag*0.5f, transform.position.y + 0.5f, 0), Quaternion.identity);
+        Instantiate(bulletPrefab, new Vector3(transform.position.x + fdflag * 0.5f, transform.position.y + 0.5f, 0), Quaternion.identity);
+
+        bbulletflag = false; //発射したらフラグをoff カウントをリセット
+        nflame = 0;
     }
+    
+    ///////////////////////////////////////////////////
+    //  　　　キャラ移動処理
+    //////////////////////////////////////////////////
     void Move(float move, bool jump)
     {
         if (Mathf.Abs(move) > 0)
         {
             Quaternion rot = transform.rotation;
             transform.rotation = Quaternion.Euler(rot.x, Mathf.Sign(move) == 1 ? 0 : 180, rot.z);
-            fdflag=Mathf.Sign(move); 
+            fdflag = Mathf.Sign(move);
         }
 
         m_rigidbody2D.velocity = new Vector2(move * maxSpeed, m_rigidbody2D.velocity.y);
@@ -118,11 +142,14 @@ public class UnityChan2DController : MonoBehaviour
             Invoke("jump", 0.02f); //落下直後にジャンプするとなぜか飛び上がらないためaddforceのみ処理を遅らせる
         }
     }
-
     void jump()
     {
-      m_rigidbody2D.AddForce(Vector2.up * jumpPower);
+        m_rigidbody2D.AddForce(Vector2.up * jumpPower);
     }
+
+    //////////////////////////////////////////////////////////////////
+    // 　　　　updateより短い周期で周回
+    /////////////////////////////////////////////////////////////////
     void FixedUpdate()
     {
         Vector2 pos = transform.position;

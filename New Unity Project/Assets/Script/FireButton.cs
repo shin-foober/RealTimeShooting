@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class FireButton : MonoBehaviour
 {
- 
-  //現状連射は出来ない仕様
-  //連射したいならLRボタンと同じ処理に変更
-  //発射間隔はUnityContorollerで
     public bool bfire = false;
     public void PushDown()
     {
@@ -18,7 +14,6 @@ public class FireButton : MonoBehaviour
         // 縦方向のサイズ
         rtf.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 65);
     }
-
     public void PushUp()
     {
         var rtf = GetComponent<RectTransform>();

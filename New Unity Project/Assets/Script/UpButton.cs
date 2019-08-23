@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UpButton : MonoBehaviour
 {
-    public bool bJump = false;
+    public bool bJump;
 
     void Start()
     {
