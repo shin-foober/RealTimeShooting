@@ -60,7 +60,6 @@ public class UnityChan2DController : MonoBehaviour
         // Adjustparameter
         nfirstjump = 0;
         bbulletflag = true;
-        fdflag = 1;
     }
 
     void Awake()
@@ -72,6 +71,7 @@ public class UnityChan2DController : MonoBehaviour
         refObjR = GameObject.Find("RightButton");
         refObjL = GameObject.Find("LeftButton");
         refObjF = GameObject.Find("FireButton");
+        fdflag = 1;
     }
 
     /////////////////////////////////////////////////
@@ -115,7 +115,7 @@ public class UnityChan2DController : MonoBehaviour
         bbulletflag = false; //発射したらフラグをoff カウントをリセット
         nflame = 0;
     }
-    
+
     ///////////////////////////////////////////////////
     //  　　　キャラ移動処理
     //////////////////////////////////////////////////
