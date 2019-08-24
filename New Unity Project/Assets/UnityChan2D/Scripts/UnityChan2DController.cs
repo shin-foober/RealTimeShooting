@@ -110,7 +110,7 @@ public class UnityChan2DController : MonoBehaviour
     /////////////////////////////////////////////////////
     void Shot()
     {
-        Instantiate(bulletPrefab, new Vector3(transform.position.x + fdflag * 0.5f, transform.position.y + 0.5f, 0), Quaternion.identity);
+        Instantiate(bulletPrefab, new Vector3(transform.position.x + fdflag * 1f, transform.position.y + 0.5f, 0), Quaternion.identity);
 
         bbulletflag = false; //発射したらフラグをoff カウントをリセット
         nflame = 0;
