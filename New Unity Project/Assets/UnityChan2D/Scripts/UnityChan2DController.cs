@@ -56,7 +56,7 @@ public class UnityChan2DController : MonoBehaviour
         // Animator
         m_animator.applyRootMotion = false;
 
-        
+
         // Adjustparameter
         nfirstjump = 0;
         bbulletflag = true;
@@ -94,14 +94,14 @@ public class UnityChan2DController : MonoBehaviour
             if (fireButton.bfire && bbulletflag)
                 Shot();
 
-            if (false == jump) //ジャンプが二回読み込まれてしまったので一回だけにするように調整　
-                nfirstjump = 0;
-
-            if (false == fireButton.bfire && 1 == nflame % 30) //取り敢えず30fに一度の発射で false == fireButton.bfireは高速発射防止のため追加
+            if (30 == nflame ) //取り敢えず30fに一度の発射で false == fireButton.bfireは高速発射防止のため追加
                 bbulletflag = true;
 
             if (false == bbulletflag) //発射不能時のみカウント
                 nflame += 1;
+
+            if (false == jump) //ジャンプが二回読み込まれてしまったので一回だけにするように調整　
+                nfirstjump = 0;
         }
     }
 
@@ -110,7 +110,7 @@ public class UnityChan2DController : MonoBehaviour
     /////////////////////////////////////////////////////
     void Shot()
     {
-        Instantiate(bulletPrefab, new Vector3(transform.position.x + fdflag * 1f, transform.position.y + 0.5f, 0), Quaternion.identity);
+        Instantiate(bulletPrefab, new Vector3(transform.position.x + fdflag * 1f, transform.position.y - 0.5f, 0), Quaternion.identity);
 
         bbulletflag = false; //発射したらフラグをoff カウントをリセット
         nflame = 0;

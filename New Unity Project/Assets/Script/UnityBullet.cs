@@ -18,14 +18,7 @@ public class UnityBullet : MonoBehaviour
         playerObj = GameObject.FindWithTag("Player");
         UnityChan2DController unityChan2DController = playerObj.GetComponent<UnityChan2DController>();
 
-        if (1 == unityChan2DController.fdflag)
-        {
-            ndirection = 1;
-        }
-        else
-        {
-            ndirection = -1;
-        }
+        ndirection = (int)unityChan2DController.fdflag;
     }
 
     // Update is called once per frame
@@ -34,15 +27,15 @@ public class UnityBullet : MonoBehaviour
         transform.Translate(ndirection * 0.05f, 0, 0);
         Invoke("Destroy", nLimittime);
     }
-    void Destroy()
-    {
-        Destroy(gameObject);
-    }
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (playerObj != coll.gameObject)
         {
-            Destroy(gameObject);
+            Destroy();
         }
+    }
+    void Destroy()
+    {
+        Destroy(gameObject);
     }
 }
