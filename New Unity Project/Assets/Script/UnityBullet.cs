@@ -13,7 +13,6 @@ public class UnityBullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nTimer = 0;
         nLimittime = 3;
         playerObj = GameObject.FindWithTag("Player");
         UnityChan2DController unityChan2DController = playerObj.GetComponent<UnityChan2DController>();

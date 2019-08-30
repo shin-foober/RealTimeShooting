@@ -12,7 +12,7 @@ public class UnityChan2DController : MonoBehaviour
     private Animator m_animator;
     private BoxCollider2D m_boxcollier2D;
     private Rigidbody2D m_rigidbody2D;
-    private bool m_isGround;
+    public bool m_isGround;
     private const float m_centerY = 1.5f;
 
     private State m_state = State.Normal;
@@ -28,6 +28,7 @@ public class UnityChan2DController : MonoBehaviour
     GameObject refObjR; //ボタン操作取得のために追加　→ 用
     GameObject refObjL; //ボタン操作取得のために追加　←　用
     GameObject refObjF; //ボタン操作取得のために追加　弾発射用
+    GameObject JumpObj; //大ジャンプ
 
 
     ///////////////////////////////////////////////////////////////
@@ -71,6 +72,7 @@ public class UnityChan2DController : MonoBehaviour
         refObjR = GameObject.Find("RightButton");
         refObjL = GameObject.Find("LeftButton");
         refObjF = GameObject.Find("FireButton");
+        JumpObj = GameObject.FindWithTag("Jump");
         fdflag = 1;
     }
 
@@ -83,18 +85,22 @@ public class UnityChan2DController : MonoBehaviour
         RightButton rightButton = refObjR.GetComponent<RightButton>();
         LeftButton leftButton = refObjL.GetComponent<LeftButton>();
         FireButton fireButton = refObjF.GetComponent<FireButton>();
+        Up up = JumpObj.GetComponent<Up>();
+
         if (m_state != State.Damaged)
         {
-            float x = rightButton.fRight + leftButton.fLeft;
-            bool jump = upButton.bJump;
+            //キーでも反映
+            float x = rightButton.fRight + leftButton.fLeft+Input.GetAxis("Horizontal");
+            bool jump = upButton.bJump | Input.GetButtonDown("Jump");
+
 
             Move(x, jump);
 
             // 弾の発射処理
-            if (fireButton.bfire && bbulletflag)
+            if ((Input.GetKey(KeyCode.X)||fireButton.bfire) && bbulletflag)
                 Shot();
 
-            if (30 == nflame ) //取り敢えず30fに一度の発射で false == fireButton.bfireは高速発射防止のため追加
+            if (30 == nflame) //取り敢えず30fに一度の発射で
                 bbulletflag = true;
 
             if (false == bbulletflag) //発射不能時のみカウント
@@ -102,6 +108,12 @@ public class UnityChan2DController : MonoBehaviour
 
             if (false == jump) //ジャンプが二回読み込まれてしまったので一回だけにするように調整　
                 nfirstjump = 0;
+
+            if (up.bigjump)    // upobjectからのフラグでjump
+            {
+                m_rigidbody2D.AddForce(Vector2.up * jumpPower*2);
+                up.bigjump = false;
+            }
         }
     }
 

@@ -53,14 +53,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Script\BrokenBlockController.cs" />
+     <Compile Include="Assets\Script\BrokenObj.cs" />
      <Compile Include="Assets\Script\FireButton.cs" />
      <Compile Include="Assets\Script\LeftButton.cs" />
+     <Compile Include="Assets\Script\MainCamera.cs" />
+     <Compile Include="Assets\Script\Obatacle.cs" />
      <Compile Include="Assets\Script\RightButton.cs" />
+     <Compile Include="Assets\Script\Switch.cs" />
+     <Compile Include="Assets\Script\TextScroll.cs" />
      <Compile Include="Assets\Script\UnityBullet.cs" />
+     <Compile Include="Assets\Script\Up.cs" />
      <Compile Include="Assets\Script\UpButton.cs" />
      <Compile Include="Assets\UnityChan2D\Demo\Scripts\AudioSourceController.cs" />
      <Compile Include="Assets\UnityChan2D\Demo\Scripts\BlockController.cs" />
-     <Compile Include="Assets\UnityChan2D\Demo\Scripts\BrokenBlockController.cs" />
      <Compile Include="Assets\UnityChan2D\Demo\Scripts\CameraController.cs" />
      <Compile Include="Assets\UnityChan2D\Demo\Scripts\CoinController.cs" />
      <Compile Include="Assets\UnityChan2D\Demo\Scripts\Demo.cs" />
