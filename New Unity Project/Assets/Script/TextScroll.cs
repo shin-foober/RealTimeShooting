@@ -20,7 +20,7 @@ public class TextScroll : MonoBehaviour
     void Start()
     {
         stepflag = false;
-        levelup = false;
+        levelup = true;
     }
 
     // Use this for initialization
@@ -43,8 +43,8 @@ public class TextScroll : MonoBehaviour
                 {
                     stepflag = true;
                 }
-                else if(start.transform.position.x > 1500)
-                 Destroy(start);
+                else if (start.transform.position.x > 1500)
+                    Destroy(start);
             }
         }
         foreach (GameObject step in stepobj)
@@ -61,7 +61,7 @@ public class TextScroll : MonoBehaviour
         }
         foreach (GameObject step2 in step2obj)
         {
-            if (levelup && null != step2)
+            if (!levelup && null != step2)
             {
                 step2.GetComponent<Text>().enabled = true;
                 step2.transform.Translate(20f, 0, 0);
@@ -73,18 +73,21 @@ public class TextScroll : MonoBehaviour
         }
         foreach (GameObject floor in floorobj)
         {
-            if (levelup)
-            {
-                floor.GetComponent<BoxCollider2D>().isTrigger = false;　//上の床をONに
-            }
+            floor.GetComponent<BoxCollider2D>().isTrigger = levelup;　//上の床をONに
         }
-
 
         if (Player.transform.position.y > 18) //大ジャンプでしか多分超えられない
         {
+            levelup = false;
+        }
+        else if (Player.transform.position.y < 10)
+        {
             levelup = true;
         }
-
+        else
+        {
+            ;
+        }
     }
 }
 

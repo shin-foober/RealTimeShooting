@@ -20,17 +20,17 @@ public class Switch : MonoBehaviour
         {
             foreach (GameObject On in OnObj)
             {
-                On.GetComponent<SpriteRenderer>().enabled = false;
+                On.GetComponent<SpriteRenderer>().enabled = On.GetComponent<SpriteRenderer>().enabled ^ true;
             }
             foreach (GameObject Off in OffObj)
             {
-                Off.GetComponent<SpriteRenderer>().enabled = true;
+                Off.GetComponent<SpriteRenderer>().enabled = Off.GetComponent<SpriteRenderer>().enabled ^ true;
             }
             foreach (GameObject Des in DestroyObj) //スイッチにより発生するオブジェクトの処理
             {
-                Destroy(Des);
+                Des.GetComponent<SpriteRenderer>().enabled = Des.GetComponent<SpriteRenderer>().enabled ^ true;
+                Des.GetComponent<BoxCollider2D>().isTrigger = Des.GetComponent<BoxCollider2D>().isTrigger ^ true;
             }
-             //this.GetComponent<SpriteRenderer>().enabled = false; //当たり判定だけ作っとけばよい
         }
     }
 }
