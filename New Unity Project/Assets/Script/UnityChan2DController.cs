@@ -21,6 +21,7 @@ public class UnityChan2DController : MonoBehaviour
 
     private bool bbulletflag;
     private int nflame;
+    public bool bigjump;
 
     public GameObject bulletPrefab;  //弾丸のprefab
 
@@ -29,6 +30,7 @@ public class UnityChan2DController : MonoBehaviour
     GameObject refObjL; //ボタン操作取得のために追加　←　用
     GameObject refObjF; //ボタン操作取得のために追加　弾発射用
     GameObject JumpObj; //大ジャンプ
+
 
 
     ///////////////////////////////////////////////////////////////
@@ -61,6 +63,7 @@ public class UnityChan2DController : MonoBehaviour
         // Adjustparameter
         nfirstjump = 0;
         bbulletflag = true;
+        bigjump = false;
     }
 
     void Awake()
@@ -85,7 +88,6 @@ public class UnityChan2DController : MonoBehaviour
         RightButton rightButton = refObjR.GetComponent<RightButton>();
         LeftButton leftButton = refObjL.GetComponent<LeftButton>();
         FireButton fireButton = refObjF.GetComponent<FireButton>();
-        Up up = JumpObj.GetComponent<Up>();
 
         if (m_state != State.Damaged)
         {
@@ -109,10 +111,10 @@ public class UnityChan2DController : MonoBehaviour
             if (false == jump) //ジャンプが二回読み込まれてしまったので一回だけにするように調整　
                 nfirstjump = 0;
 
-            if (up.bigjump)    // upobjectからのフラグでjump
+            if (bigjump)    // upobjectからのフラグでjump
             {
                 m_rigidbody2D.AddForce(Vector2.up * jumpPower*2);
-                up.bigjump = false;
+                bigjump = false;
             }
         }
     }

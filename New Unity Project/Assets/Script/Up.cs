@@ -9,6 +9,7 @@ public class Up : MonoBehaviour
     public AudioClip breakClip;
     private BoxCollider2D m_boxCollider2D;
     public bool bigjump;
+    GameObject playerObj;
     void Awake()
     {
         m_boxCollider2D = GetComponent<BoxCollider2D>();
@@ -17,6 +18,8 @@ public class Up : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
+        playerObj = GameObject.FindWithTag("Player");
+        UnityChan2DController unityChan2DController = playerObj.GetComponent<UnityChan2DController>();
         if (coll.gameObject.tag == "Player")
         {
             Vector2 pos = transform.position;
@@ -24,7 +27,7 @@ public class Up : MonoBehaviour
             Vector2 groundArea = new Vector2(m_boxCollider2D.size.x * transform.lossyScale.y * 0.45f, 0.05f);
             var col2D = Physics2D.OverlapArea(groundCheck + groundArea, groundCheck - groundArea, whatIsPlayer);
                  
-            bigjump = true; //ジャンプフラグをON
+            unityChan2DController.bigjump = true; //ジャンプフラグをON
         }
     }
 }

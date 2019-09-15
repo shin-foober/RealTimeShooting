@@ -54,15 +54,17 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Script\BrokenBlockController.cs" />
-     <Compile Include="Assets\Script\BrokenObj.cs" />
+     <Compile Include="Assets\Script\enemy.cs" />
      <Compile Include="Assets\Script\FireButton.cs" />
      <Compile Include="Assets\Script\LeftButton.cs" />
      <Compile Include="Assets\Script\MainCamera.cs" />
      <Compile Include="Assets\Script\Obatacle.cs" />
+     <Compile Include="Assets\Script\Reflect.cs" />
      <Compile Include="Assets\Script\RightButton.cs" />
      <Compile Include="Assets\Script\Switch.cs" />
      <Compile Include="Assets\Script\TextScroll.cs" />
      <Compile Include="Assets\Script\UnityBullet.cs" />
+     <Compile Include="Assets\Script\UnityChan2DController.cs" />
      <Compile Include="Assets\Script\Up.cs" />
      <Compile Include="Assets\Script\UpButton.cs" />
      <Compile Include="Assets\UnityChan2D\Demo\Scripts\AudioSourceController.cs" />
@@ -77,23 +79,22 @@
      <Compile Include="Assets\UnityChan2D\Demo\Scripts\SceneNameAttribute.cs" />
      <Compile Include="Assets\UnityChan2D\Demo\Scripts\StartController.cs" />
      <Compile Include="Assets\UnityChan2D\Demo\Scripts\TimeController.cs" />
-     <Compile Include="Assets\UnityChan2D\Scripts\UnityChan2DController.cs" />
      <None Include="Assets\Robot Shooting Game\Read Me.txt" />
      <None Include="Assets\UnityChan2D\Demo\Sounds\Voice\unity-chan_voice_list.txt" />
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/sst27/Desktop/realtimeshooting/RealTimeShooting/New Unity Project/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/sst27/Desktop/pullonly/shoot/RealTimeShooting/New Unity Project/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>C:/Users/sst27/Desktop/realtimeshooting/RealTimeShooting/New Unity Project/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>C:/Users/sst27/Desktop/pullonly/shoot/RealTimeShooting/New Unity Project/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>C:/Users/sst27/Desktop/realtimeshooting/RealTimeShooting/New Unity Project/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>C:/Users/sst27/Desktop/pullonly/shoot/RealTimeShooting/New Unity Project/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/sst27/Desktop/realtimeshooting/RealTimeShooting/New Unity Project/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/sst27/Desktop/pullonly/shoot/RealTimeShooting/New Unity Project/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.DataPrivacy">
- <HintPath>C:/Users/sst27/Desktop/realtimeshooting/RealTimeShooting/New Unity Project/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+ <HintPath>C:/Users/sst27/Desktop/pullonly/shoot/RealTimeShooting/New Unity Project/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -294,13 +295,13 @@
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.14f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>C:/Users/sst27/Desktop/realtimeshooting/RealTimeShooting/New Unity Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>C:/Users/sst27/Desktop/pullonly/shoot/RealTimeShooting/New Unity Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>C:/Users/sst27/Desktop/realtimeshooting/RealTimeShooting/New Unity Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>C:/Users/sst27/Desktop/pullonly/shoot/RealTimeShooting/New Unity Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
- <HintPath>C:/Users/sst27/Desktop/realtimeshooting/RealTimeShooting/New Unity Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+ <HintPath>C:/Users/sst27/Desktop/pullonly/shoot/RealTimeShooting/New Unity Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.14f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

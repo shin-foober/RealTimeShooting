@@ -33,7 +33,7 @@ public class TextScroll : MonoBehaviour
     //------------------------------------------------------------------------------
     void Update()
     {
-        foreach (GameObject start in TutorialObj)
+    /*     foreach (GameObject start in TutorialObj)
         {
             if (null != start)
             {
@@ -70,7 +70,7 @@ public class TextScroll : MonoBehaviour
                     Destroy(step2);
                 }
             }
-        }
+        }*/
         foreach (GameObject floor in floorobj)
         {
             floor.GetComponent<BoxCollider2D>().isTrigger = levelup;　//上の床をONに

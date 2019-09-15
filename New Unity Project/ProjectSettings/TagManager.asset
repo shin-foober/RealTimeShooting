@@ -6,6 +6,8 @@ TagManager:
   tags:
   - DamageObject
   - Jump
+  - Reflect
+  - Jump2
   layers:
   - Default
   - TransparentFX
